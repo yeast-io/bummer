@@ -18,8 +18,8 @@ app.use(output);
 
 // Set up the application routes
 app
-	.get('/', async (c: Context) => {
-		return c.text('OK');
+	.get('/health-check', async (c: Context) => {
+		return c.json({ code: 0, message: 'ok' });
 	});
 
 // Start the server

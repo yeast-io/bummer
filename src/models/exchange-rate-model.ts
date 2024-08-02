@@ -35,6 +35,7 @@ export class ExchangeRate {
 		if (!value || isNaN(Number(value))) {
 			throw new Error('Invalid value');
 		}
+		// @ts-ignore - Types are incorrect
 		return new mongoose.Types.Decimal128.fromString(value);
 	}
 }
