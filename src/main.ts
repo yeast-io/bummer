@@ -28,8 +28,8 @@ const server = Deno.serve({
 	onListen: ({ hostname, port }) => {
 		logger.info(`Server started at http://${hostname}:${port}`);
 		Deno.cron('ExchangeRateHandler', '30 1 * * *', async () => {
-			exchangeRateHandler('CNY');
-		});
+      exchangeRateHandler('CNY');
+    });
 	},
 }, app.fetch);
 
