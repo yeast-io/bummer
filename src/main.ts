@@ -8,11 +8,13 @@ import { exchangeRateHandler } from './crons/exchange-rate.ts';
 const app = new Hono();
 
 // Connect to MongoDB
-const connection = await connect({
-	host: Deno.env.get('MONGODB_HOST'),
-	port: Number(Deno.env.get('MONGODB_PORT')),
-	dbName: Deno.env.get('MONGODB_DBNAME'),
-});
+const connection = Deno.env.get('MONGODB_URI') ? 
+  (await connect({ uri: Deno.env.get('MONGODB_URI')}))
+  : (await connect({
+    host: Deno.env.get('MONGODB_HOST'),
+    port: Number(Deno.env.get('MONGODB_PORT')),
+    dbName: Deno.env.get('MONGODB_DBNAME'),
+  }));
 
 app.use(output);
 
