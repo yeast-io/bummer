@@ -13,34 +13,41 @@ export const getExchangeRates = async (base: string) => {
 };
 
 export const exchangeRateHandler = async (base: string) => {
-	if (!base) {
-		logger.error(new Error('Base currency is required'));
-		return null;
-	}
-
-	const data = await getExchangeRates(base);
-	if (data.result !== 'success') {
-		logger.warn(`Failed to fetch exchange rates for ${base}`);
-		return null;
-	}
-
-	const documents: IExchangeRate[] = [];
-	for (const [target_code, conversion_rate] of Object.entries(data.conversion_rates)) {
-		logger.info(`Setting exchange rate ${base} to ${target_code} as ${conversion_rate}`);
-		// Save the exchange rate to MongoDB
-		if (target_code === base) {
-			continue;
+	try {
+		if (!base) {
+			logger.error(new Error('Base currency is required'));
+			return null;
 		}
 
-		documents.push({
-			base_code: base,
-			target_code,
-			conversion_rate: model.decimal128(String(conversion_rate)),
-			createdAt: new Date(data.time_last_update_utc),
-		});
-	}
+		const data = await getExchangeRates(base);
+		if (data.result !== 'success') {
+			logger.warn(`Failed to fetch exchange rates for ${base}`);
+			return null;
+		}
 
-	const count = await model.setConversionRates(documents);
-	logger.info(`Saved ${count} exchange rates to MongoDB`);
-	return count;
+		const documents: IExchangeRate[] = [];
+		for (const [target_code, conversion_rate] of Object.entries(data.conversion_rates)) {
+			logger.info(`Setting exchange rate ${base} to ${target_code} as ${conversion_rate}`);
+			// Save the exchange rate to MongoDB
+			if (target_code === base) {
+				continue;
+			}
+
+			documents.push({
+				base_code: base,
+				target_code,
+				conversion_rate: model.decimal128(String(conversion_rate)),
+				unique_ts: Math.floor(new Date(data.time_last_update_utc).getTime() / 1000),
+				createdAt: new Date(data.time_last_update_utc),
+			});
+		}
+
+		const count = await model.setConversionRates(documents);
+		logger.info(`Saved ${count} exchange rates to MongoDB`);
+		return count;
+	} catch (err) {
+		logger.error(err);
+		logger.error('Failed to fetch exchange rates and 0 will be returned');
+		return 0;
+	}
 };

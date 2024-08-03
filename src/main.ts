@@ -1,7 +1,7 @@
 import './config.ts';
 import { Context, Hono } from 'hono';
 import { connect } from './models/client.ts';
-import { fatal, logger } from './logger.ts';
+import { logger } from './logger.ts';
 import { output } from './middlewares/output.ts';
 import { exchangeRateHandler } from './crons/exchange-rate.ts';
 import { ExchangeRateRouter } from './routes/exchange-rate-router.ts';
