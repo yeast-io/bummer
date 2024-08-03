@@ -46,6 +46,6 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "yeast-io-bummer"
-          entrypoint: "main.ts"
+          entrypoint: "src/main.ts"
           root: "."
           token: ${{ secrets.BUMMER_DENO_DEPLOY_TOKEN }}
