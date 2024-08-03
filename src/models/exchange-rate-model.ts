@@ -36,6 +36,6 @@ export class ExchangeRate {
 			throw new Error('Invalid value');
 		}
 		// @ts-ignore - Types are incorrect
-		return new mongoose.Types.Decimal128.fromString(value);
+		return mongoose.Types.Decimal128.fromString(value);
 	}
 }

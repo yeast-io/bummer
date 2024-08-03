@@ -42,4 +42,5 @@ export const exchangeRateHandler = async (base: string) => {
 
 	const count = await model.setConversionRates(documents);
 	logger.info(`Saved ${count} exchange rates to MongoDB`);
+	return count;
 };

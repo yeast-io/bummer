@@ -11,6 +11,12 @@ log.setup({
 			useColors: true,
 		}),
 	},
+	loggers: {
+		default: {
+			level: 'INFO',
+			handlers: ['default'],
+		},
+	},
 });
 
 export const logger = log.getLogger();
