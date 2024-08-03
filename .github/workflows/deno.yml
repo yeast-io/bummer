@@ -49,7 +49,7 @@ jobs:
       - name: Deploy to Deno
         uses: denoland/deployctl@v1
         env:
-          DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}  # Set the token as an environment variable
+          DENO_DEPLOY_TOKEN: ${{ secrets.BUMMER_DENO_DEPLOY_TOKEN }}  # Set the token as an environment variable
         with:
           project: "yeast-io-bummer"
           entrypoint: "src/main.ts"
