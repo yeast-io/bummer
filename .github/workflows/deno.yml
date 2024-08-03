@@ -15,7 +15,7 @@ on:
     branches: ["main"]
 
 permissions:
-  id-token: write
+  id-token: ${{ secrets.BUMMER_DENO_DEPLOY_TOKEN }}
   contents: read
 
 jobs:
@@ -48,8 +48,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Deploy to Deno
         uses: denoland/deployctl@v1
-        env:
-          DENO_DEPLOY_TOKEN: ${{ secrets.BUMMER_DENO_DEPLOY_TOKEN }}  # Set the token as an environment variable
         with:
           project: "yeast-io-bummer"
           entrypoint: "src/main.ts"
