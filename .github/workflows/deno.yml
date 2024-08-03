@@ -45,7 +45,7 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "bummer"
+          project: "yeast-io-bummer"
           entrypoint: "main.ts"
           root: "."
           token: ${{ secrets.BUMMER_DENO_DEPLOY_TOKEN }}
