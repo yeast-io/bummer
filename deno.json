@@ -1,50 +1,64 @@
 {
-	"include": ["src/"],
-	"exclude": [
-		"src/testdata/",
-		"scripts/",
-		"src/fixtures/**/*.ts",
-		".vscode/",
-		".markdownlint.json",
-		"README.md",
-		"views/"
-	],
-	"imports": {
-		"@std/crypto": "jsr:@std/crypto@^1.0.1",
-		"@std/dotenv": "jsr:@std/dotenv@^0.224.2",
-		"@std/log": "jsr:@std/log@^0.224.5",
-		"dayjs": "npm:dayjs@^1.11.12",
-		"hono": "jsr:@hono/hono@^4.4.13",
-		"mongoose": "npm:mongoose@^8.5.1"
-	},
-	"tasks": {
-		"start": "deno run --allow-read --allow-sys --allow-env --allow-net --watch src/main.ts",
-		"start:dev:dependencies": "docker-compose -f docker-compose.yml up --build -d",
-		"pretty": "deno lint && deno fmt",
-		"test": "deno test --allow-all"
-	},
-	"compilerOptions": {
-		"jsx": "precompile",
-		"jsxImportSource": "hono/jsx"
-	},
-	"lint": {
-		"rules": {
-			"tags": ["recommended"],
-			"include": ["ban-untagged-todo"],
-			"exclude": [
-				"no-unused-vars",
-				"require-await",
-				"no-explicit-any"
-			]
-		}
-	},
-	"fmt": {
-		"useTabs": true,
-		"lineWidth": 110,
-		"indentWidth": 2,
-		"semiColons": true,
-		"singleQuote": true,
-		"proseWrap": "preserve"
-	},
-	"lock": true
+  "include": [
+    "src/"
+  ],
+  "exclude": [
+    "src/testdata/",
+    "scripts/",
+    "src/fixtures/**/*.ts",
+    ".vscode/",
+    ".markdownlint.json",
+    "README.md",
+    "views/"
+  ],
+  "imports": {
+    "@std/crypto": "jsr:@std/crypto@^1.0.1",
+    "@std/dotenv": "jsr:@std/dotenv@^0.224.2",
+    "@std/log": "jsr:@std/log@^0.224.5",
+    "dayjs": "npm:dayjs@^1.11.12",
+    "hono": "jsr:@hono/hono@^4.4.13",
+    "mongoose": "npm:mongoose@^8.5.1"
+  },
+  "tasks": {
+    "start": "deno run --allow-read --allow-sys --allow-env --allow-net --watch src/main.ts",
+    "start:dev:dependencies": "docker-compose -f docker-compose.yml up --build -d",
+    "pretty": "deno lint && deno fmt",
+    "test": "deno test --allow-all"
+  },
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "hono/jsx"
+  },
+  "lint": {
+    "rules": {
+      "tags": [
+        "recommended"
+      ],
+      "include": [
+        "ban-untagged-todo"
+      ],
+      "exclude": [
+        "no-unused-vars",
+        "require-await",
+        "no-explicit-any"
+      ]
+    }
+  },
+  "fmt": {
+    "useTabs": true,
+    "lineWidth": 110,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": true,
+    "proseWrap": "preserve"
+  },
+  "lock": true,
+  "deploy": {
+    "project": "36a9054c-ce3b-4fc1-aa50-9a364a02e4b7",
+    "exclude": [
+      "**/node_modules"
+    ],
+    "include": [],
+    "entrypoint": "src/main.ts"
+  }
 }

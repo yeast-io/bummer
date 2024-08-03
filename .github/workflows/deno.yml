@@ -15,7 +15,7 @@ on:
     branches: ["main"]
 
 permissions:
-  id-token: ${{ secrets.BUMMER_DENO_DEPLOY_TOKEN }}
+  id-token: write
   contents: read
 
 jobs:
