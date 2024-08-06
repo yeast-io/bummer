@@ -12,6 +12,7 @@ export interface IExchangeRate {
 const schema = new mongoose.Schema<IExchangeRate>({
 	base_code: { type: String, required: true },
 	target_code: { type: String, required: true },
+	// @ts-ignore - Types are incorrect
 	conversion_rate: { type: mongoose.Types.Decimal128, required: true },
 	unique_ts: { type: Number, required: true },
 }, { timestamps: true });
@@ -19,6 +20,7 @@ const schema = new mongoose.Schema<IExchangeRate>({
 schema.index({ base_code: 1 });
 schema.index({ target_code: 1 });
 schema.index({ unique_ts: 1 });
+// @ts-ignore - Types are incorrect
 schema.index({ base_code: 1, target_code: 1, unique_ts: 1 }, { unique: true });
 
 const model = mongoose.model<IExchangeRate>('ExchangeRate', schema);
