@@ -22,6 +22,7 @@ schema.index({ target_code: 1 });
 schema.index({ unique_ts: 1 });
 // @ts-ignore - Types are incorrect
 schema.index({ base_code: 1, target_code: 1, unique_ts: 1 }, { unique: true });
+schema.index({ createdAt: 1 });
 
 const model = mongoose.model<IExchangeRate>('ExchangeRate', schema);
 
